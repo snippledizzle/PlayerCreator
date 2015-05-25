@@ -495,4 +495,29 @@ public class PlayerCreator {
 		}
 		return false;
 	}
+	public int[] optimizeArray(int[] a, int[] b){
+		int[] x = new int[7];
+		for(int i = 0; i<x.length; i++){
+			if(a[i] < b[i])
+				x[i] = b[i];
+			else
+				x[i] = a[i];
+		}
+		return x;
+	}
+	
+	public int[] optimizeArray(int[] a, int[] b, int[] c){
+		
+		int[] x = new int[7];
+		
+		for(int i = 0; i < x.length; i++){
+			if(a[i] >= b[i] && a[i] >= c[i])
+				x[i] = a[i];
+			else if(b[i] >= a[i] && b[i] >= c[i])
+				x[i] = b[i];
+			else
+				x[i] = c[i];
+		}
+		return x;
+	}
 }
