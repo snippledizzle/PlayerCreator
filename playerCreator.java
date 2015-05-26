@@ -459,6 +459,102 @@ public class PlayerCreator {
 				error("Player characters that are Bards cannot be Chaotic Good.");
 			else if(classes[0] == 14 && align == 9 || classes[classes.length/2] == 14 && align == 9 || classes[classes.length-1] == 14 && align == 9)
 				error("Player characters that are Bards cannot be Chaotic Evil.");
+			else
+				flag5 = false;
+		}
+		int[] cavalier = {8,6,4,7,9,3,5};
+		int[] paladin = {7,5,8,3,6,9,4};
+		int[] cleric = {7,4,9,5,8,6,3};
+		int[] druid = {7,4,8,5,6,9,3};
+		int[] fighter = {9,3,5,7,8,6,4};
+		int[] ranger = {7,6,8,5,9,4,3};
+		int[] mu = {4,9,7,8,6,5,3};
+		int[] illusionist = {3,8,7,9,5,6,4};
+		int[] thief = {6,5,3,9,7,4,8};
+		int[] assassin = {6,7,4,9,8,3,5};
+		int[] monk = {7,5,9,8,6,4,3};
+		int[] firstClass = new int[7];
+		int[] secondClass = new int[7];
+		int[] thirdClass = new int [7];
+		
+		if(classes[0] == 1)
+			firstClass = cavalier;
+		else if(classes[0] == 2)
+			firstClass = paladin;
+		else if(classes[0] == 3)
+			firstClass = cleric;
+		else if(classes[0] == 4)
+			firstClass = druid;
+		else if(classes[0] == 5 || classes[0] == 6)
+			firstClass = fighter;
+		else if(classes[0] == 7)
+			firstClass = ranger;
+		else if(classes[0] == 8)
+			firstClass = mu;
+		else if(classes[0] == 9)
+			firstClass = illusionist;
+		else if(classes[0] == 10 || classes[0] == 11)
+			firstClass = thief;
+		else if(classes[0] == 12)
+			firstClass = assassin;
+		else if(classes[0] == 13)
+			firstClass = monk;
+		
+		if(classes.length > 1){
+			if(classes[1] == 1)
+				secondClass = cavalier;
+			else if(classes[1] == 2)
+				secondClass = paladin;
+			else if(classes[1] == 3)
+				secondClass = cleric;
+			else if(classes[1] == 4)
+				secondClass = druid;
+			else if(classes[1] == 5 || classes[1] == 6)
+				secondClass = fighter;
+			else if(classes[1] == 7)
+				secondClass = ranger;
+			else if(classes[1] == 8)
+				secondClass = mu;
+			else if(classes[1] == 9)
+				secondClass = illusionist;
+			else if(classes[1] == 10 || classes[1] == 11)
+				secondClass = thief;
+			else if(classes[1] == 12)
+				secondClass = assassin;
+			else if(classes[1] == 13)
+				secondClass = monk;
+		}
+		
+		if(classes.length > 2){
+			if(classes[2] == 1)
+				thirdClass = cavalier;
+			else if(classes[2] == 2)
+				thirdClass = paladin;
+			else if(classes[2] == 3)
+				thirdClass = cleric;
+			else if(classes[2] == 4)
+				thirdClass = druid;
+			else if(classes[2] == 5 || classes[2] == 6)
+				thirdClass = fighter;
+			else if(classes[2] == 7)
+				thirdClass = ranger;
+			else if(classes[2] == 8)
+				thirdClass = mu;
+			else if(classes[2] == 9)
+				thirdClass = illusionist;
+			else if(classes[2] == 10 || classes[2] == 11)
+				thirdClass = thief;
+			else if(classes[2] == 12)
+				thirdClass = assassin;
+			else if(classes[2] == 13)
+				thirdClass = monk;
+		}
+		
+		int[] x; 
+			x =  optimizeArray(firstClass,secondClass,thirdClass);
+		
+		for(int i = 0; i<x.length; i++){
+			System.out.println(x[i]+ ",");
 		}
 		
 		
@@ -494,16 +590,6 @@ public class PlayerCreator {
 				
 		}
 		return false;
-	}
-	public int[] optimizeArray(int[] a, int[] b){
-		int[] x = new int[7];
-		for(int i = 0; i<x.length; i++){
-			if(a[i] < b[i])
-				x[i] = b[i];
-			else
-				x[i] = a[i];
-		}
-		return x;
 	}
 	
 	public int[] optimizeArray(int[] a, int[] b, int[] c){
