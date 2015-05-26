@@ -5,9 +5,28 @@ import java.util.Scanner;
 public class PlayerCreator {
 
 	public static void main(String[] args) {
-		Scanner keyb = new Scanner(System.in);
+		Scanner keyb = new Scanner(System.in); //Initialize scanner for user input
+		int race = raceSelection(keyb); //Collect important information from user
+		int gender = genderSelection(keyb);
+		int numClasses = numClassesSelection(keyb, race);
+		int[] classes = classesSelection(keyb, race, numClasses);	
+		//int weaponProfs = weaponProfsSelection(keyb, classes);
+		int[] abilityDice = abilityDiceSelection(classes);
 		
-		int race = 0;
+		
+		
+		
+		
+		
+		
+	}
+	/**
+	 * Used in main to determine the race chosen by the user
+	 * @param keyb keyboard scanner used for user input
+	 * @return integer representing the desired race
+	 */
+	public static int raceSelection(Scanner keyb){ //TODO Race selection method
+		int race = 0; 
 		boolean flag1 = true;
 		while(flag1){
 			println("Please enter chosen race: \nBarbarian = 1 \nHuman = 2 \nGrey Elf = 3 \nHigh Elf = 4 \nWild Elf = 5 \nDrow Elf = 6 "
@@ -19,8 +38,15 @@ public class PlayerCreator {
 				flag1 = false;
 			}
 		}
-		
-		int gender = 0;
+		return race;
+	}
+	/**
+	 * Used in main to determine the gender chosen by the user
+	 * @param keyb keyboard scanner used for user input
+	 * @return integer representing the desired gender
+	 */
+	public static int genderSelection(Scanner keyb){ //TODO Gender seletion method
+		int gender = 0; 
 		boolean flag2 = true;
 		while(flag2){
 			println("Please enter chosen gender: \nMale = 1 \nFemale = 2");
@@ -29,8 +55,17 @@ public class PlayerCreator {
 			if(gender > 0 && gender < 3){
 				flag2 = false;
 			}
-		}
-		
+		} 
+		return gender;
+	}
+	/**
+	 * Used in main to determine the number of classes chosen by the user
+	 * @param keyb keyboard scanner used for user input
+	 * @param race integer representing the race chosen
+	 * @return integer representing the number of desired classes
+	 */
+	public static int numClassesSelection(Scanner keyb, int race){ //TODO Number of classes method
+
 		int numClasses = 0;
 		boolean flag3 = true;
 		while(flag3){
@@ -61,7 +96,16 @@ public class PlayerCreator {
 			else
 				flag3 = false;
 		}
-			
+		return numClasses;
+	}
+	/**
+	 * Used in main to determine which classes are chosen by the user
+	 * @param keyb keyboard scanner used for user input
+	 * @param race integer representing the race chosen
+	 * @param numClasses integer representing the number of desired classes
+	 * @return integer array representing the classes the user has chosen
+	 */
+	public static int[] classesSelection(Scanner keyb, int race, int numClasses){ //TODO Class selection method
 		int[] classes = new int[numClasses];
 		boolean flag4 = true;
 		while(flag4){
@@ -343,7 +387,15 @@ public class PlayerCreator {
 			else
 				flag4 = false;
 		}
-		
+		return classes;
+	}
+	/**
+	 * Used in main to determine which alignment is chosen by the user
+	 * @param keyb keyboard scanner for user input
+	 * @param classes the integer array of classes chosen
+	 * @return integer representing which alignment the user has chosen
+	 */
+	public static int alignmentSelection(Scanner keyb, int[] classes){ //TODO Alignment selection method
 		int align = 0;
 		boolean flag5 = true;
 		while(flag5){
@@ -462,113 +514,109 @@ public class PlayerCreator {
 			else
 				flag5 = false;
 		}
-		int[] cavalier = {8,6,4,7,9,3,5};
-		int[] paladin = {7,5,8,3,6,9,4};
-		int[] cleric = {7,4,9,5,8,6,3};
-		int[] druid = {7,4,8,5,6,9,3};
-		int[] fighter = {9,3,5,7,8,6,4};
-		int[] ranger = {7,6,8,5,9,4,3};
-		int[] mu = {4,9,7,8,6,5,3};
-		int[] illusionist = {3,8,7,9,5,6,4};
-		int[] thief = {6,5,3,9,7,4,8};
-		int[] assassin = {6,7,4,9,8,3,5};
-		int[] monk = {7,5,9,8,6,4,3};
-		int[] firstClass = new int[7];
-		int[] secondClass = new int[7];
-		int[] thirdClass = new int [7];
+		return align;
+	}
+	/**
+	 * Used in main to determine how many dice the character is to roll to determine ability scores
+	 * @param classes the integer array of classes chosen
+	 * @return array of the final number of dice a character will roll of each ability score
+	 */
+	public static int[] abilityDiceSelection(int[] classes){ //TODO Ability dice selection method
+		int[] cavalierAbilityDice = {8,6,4,7,9,3,5};
+		int[] paladinAbilityDice = {7,5,8,3,6,9,4};
+		int[] clericAbilityDice = {7,4,9,5,8,6,3};
+		int[] druidAbilityDice = {7,4,8,5,6,9,3}; 
+		int[] fighterAbilityDice = {9,3,5,7,8,6,4}; //These are the number of dice rolled for ability scores for each class, as per the Unearthed Arcana method V
+		int[] rangerAbilityDice = {7,6,8,5,9,4,3};
+		int[] magicuserAbilityDice = {4,9,7,8,6,5,3};
+		int[] illusionistAbilityDice = {3,8,7,9,5,6,4};
+		int[] thiefAbilityDice = {6,5,3,9,7,4,8};
+		int[] assassinAbilityDice = {6,7,4,9,8,3,5};
+		int[] monkAbilityDice = {7,5,9,8,6,4,3};
+		int[] firstClassAbilityDice = new int[7];
+		int[] secondClassAbilityDice = new int[7];
+		int[] thirdClassAbilityDice = new int [7];
 		
-		if(classes[0] == 1)
-			firstClass = cavalier;
+		if(classes[0] == 1) //Since ever character is at least single class, these statements always apply
+			firstClassAbilityDice = cavalierAbilityDice;
 		else if(classes[0] == 2)
-			firstClass = paladin;
+			firstClassAbilityDice = paladinAbilityDice;
 		else if(classes[0] == 3)
-			firstClass = cleric;
+			firstClassAbilityDice = clericAbilityDice;
 		else if(classes[0] == 4)
-			firstClass = druid;
+			firstClassAbilityDice = druidAbilityDice;
 		else if(classes[0] == 5 || classes[0] == 6)
-			firstClass = fighter;
+			firstClassAbilityDice = fighterAbilityDice;
 		else if(classes[0] == 7)
-			firstClass = ranger;
+			firstClassAbilityDice = rangerAbilityDice;
 		else if(classes[0] == 8)
-			firstClass = mu;
+			firstClassAbilityDice = magicuserAbilityDice;
 		else if(classes[0] == 9)
-			firstClass = illusionist;
+			firstClassAbilityDice = illusionistAbilityDice;
 		else if(classes[0] == 10 || classes[0] == 11)
-			firstClass = thief;
+			firstClassAbilityDice = thiefAbilityDice;
 		else if(classes[0] == 12)
-			firstClass = assassin;
+			firstClassAbilityDice = assassinAbilityDice;
 		else if(classes[0] == 13)
-			firstClass = monk;
+			firstClassAbilityDice = monkAbilityDice;
 		
-		if(classes.length > 1){
+		if(classes.length > 1){ //If there is at least a second class, these statements apply
 			if(classes[1] == 1)
-				secondClass = cavalier;
+				secondClassAbilityDice = cavalierAbilityDice;
 			else if(classes[1] == 2)
-				secondClass = paladin;
+				secondClassAbilityDice = paladinAbilityDice;
 			else if(classes[1] == 3)
-				secondClass = cleric;
+				secondClassAbilityDice = clericAbilityDice;
 			else if(classes[1] == 4)
-				secondClass = druid;
+				secondClassAbilityDice = druidAbilityDice;
 			else if(classes[1] == 5 || classes[1] == 6)
-				secondClass = fighter;
+				secondClassAbilityDice = fighterAbilityDice;
 			else if(classes[1] == 7)
-				secondClass = ranger;
+				secondClassAbilityDice = rangerAbilityDice;
 			else if(classes[1] == 8)
-				secondClass = mu;
+				secondClassAbilityDice = magicuserAbilityDice;
 			else if(classes[1] == 9)
-				secondClass = illusionist;
+				secondClassAbilityDice = illusionistAbilityDice;
 			else if(classes[1] == 10 || classes[1] == 11)
-				secondClass = thief;
+				secondClassAbilityDice = thiefAbilityDice;
 			else if(classes[1] == 12)
-				secondClass = assassin;
+				secondClassAbilityDice = assassinAbilityDice;
 			else if(classes[1] == 13)
-				secondClass = monk;
+				secondClassAbilityDice = monkAbilityDice;
 		}
 		
-		if(classes.length > 2){
+		if(classes.length > 2){ //If the character is triple class, these statements apply
 			if(classes[2] == 1)
-				thirdClass = cavalier;
+				thirdClassAbilityDice = cavalierAbilityDice;
 			else if(classes[2] == 2)
-				thirdClass = paladin;
+				thirdClassAbilityDice = paladinAbilityDice;
 			else if(classes[2] == 3)
-				thirdClass = cleric;
+				thirdClassAbilityDice = clericAbilityDice;
 			else if(classes[2] == 4)
-				thirdClass = druid;
+				thirdClassAbilityDice = druidAbilityDice;
 			else if(classes[2] == 5 || classes[2] == 6)
-				thirdClass = fighter;
+				thirdClassAbilityDice = fighterAbilityDice;
 			else if(classes[2] == 7)
-				thirdClass = ranger;
+				thirdClassAbilityDice = rangerAbilityDice;
 			else if(classes[2] == 8)
-				thirdClass = mu;
+				thirdClassAbilityDice = magicuserAbilityDice;
 			else if(classes[2] == 9)
-				thirdClass = illusionist;
+				thirdClassAbilityDice = illusionistAbilityDice;
 			else if(classes[2] == 10 || classes[2] == 11)
-				thirdClass = thief;
+				thirdClassAbilityDice = thiefAbilityDice;
 			else if(classes[2] == 12)
-				thirdClass = assassin;
+				thirdClassAbilityDice = assassinAbilityDice;
 			else if(classes[2] == 13)
-				thirdClass = monk;
+				thirdClassAbilityDice = monkAbilityDice;
 		}
 		
-		int[] x; 
-			x =  optimizeArray(firstClass,secondClass,thirdClass);
-		
-		for(int i = 0; i<x.length; i++){
-			System.out.println(x[i]+ ",");
-		}
-		
-		
-		
+		return optimizeArray(firstClassAbilityDice, secondClassAbilityDice, thirdClassAbilityDice);
 	}
-	public static void println(String s){
-		System.out.println(s);
-	}
-	public static void print(String s){
-		System.out.print(s);
-	}
-	public static void error(String s){
-		System.out.println("Error: " + s);
-	}
+	/**
+	 * Used in classSelection method to determine if the character has chosen multiple of the same class
+	 * @param classes the integer array of classes chosen
+	 * @return whether or not multiple classes were chosen
+	 */
 	public static boolean isRepeatedClasses(int[] classes){
 		int[] copy = new int[3];
 		for(int i=0; i<classes.length; i++){
@@ -591,8 +639,14 @@ public class PlayerCreator {
 		}
 		return false;
 	}
-	
-	public int[] optimizeArray(int[] a, int[] b, int[] c){
+	/**
+	 * Used in abilityDiceSelection method to compile the arrays of class ability dice to return the best possible number of dice for that character to roll.
+	 * @param a set of ability dice of the first class
+	 * @param b set of ability dice of the second class
+	 * @param c set of ability dice of the third class
+	 * @return integer array that is the best combination of number of dice for the character
+	 */
+	public static int[] optimizeArray(int[] a, int[] b, int[] c){
 		
 		int[] x = new int[7];
 		
@@ -605,5 +659,14 @@ public class PlayerCreator {
 				x[i] = c[i];
 		}
 		return x;
+	}
+	public static void println(String s){ //System.out.println shortcut
+		System.out.println(s);
+	}
+	public static void print(String s){//System.out.print shortcut
+		System.out.print(s);
+	}
+	public static void error(String s){//Same as println but with "Error: " before the message
+		System.out.println("Error: " + s);
 	}
 }
