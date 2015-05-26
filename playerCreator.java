@@ -10,7 +10,7 @@ public class PlayerCreator {
 		int gender = genderSelection(keyb);
 		int numClasses = numClassesSelection(keyb, race);
 		int[] classes = classesSelection(keyb, race, numClasses);	
-		//int weaponProfs = weaponProfsSelection(keyb, classes);
+		//int? String? int[]? weaponProfs = weaponProfsSelection(keyb, classes);
 		int[] abilityDice = abilityDiceSelection(classes);
 		
 		
