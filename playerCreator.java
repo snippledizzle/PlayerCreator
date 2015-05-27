@@ -19,8 +19,12 @@ public class PlayerCreator {
 				System.out.print(abilities[i][j] + ",");
 			}
 			System.out.println();
-			
 		}
+		int[] stats = columnSelection(keyb, abilities);
+		for(int i = 0; i < stats.length; i++){
+			println(stats[i]+"");
+		}
+		
 		
 		
 		
@@ -723,6 +727,21 @@ public class PlayerCreator {
 			}
 		}
 		return sheet;
+	}
+	/**
+	 * Takes in the users choice of stats, from the 20 columns.
+	 * @param chosenColumn, int from the user.
+	 * @param spreadSheet, the 2d array with all of the rolled stats.
+	 * @return the characters base stats, before any racial modification.
+	 */
+	public static int[] columnSelection(Scanner keyb, int[][] spreadSheet){
+		println("Choose your column wisely, enter 1 for the first column, 2 for the 2nd, etc...");
+		int chosenColumn = keyb.nextInt();
+		int[] chosenStats = new int[7];
+		for(int i = 0; i < 7; i++){
+			chosenStats[i] = spreadSheet[i][chosenColumn - 1];
+		}
+		return chosenStats;
 	}
 	public static void println(String s){ //System.out.println shortcut
 		System.out.println(s);
