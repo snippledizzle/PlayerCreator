@@ -12,6 +12,15 @@ public class PlayerCreator {
 		int[] classes = classesSelection(keyb, race, numClasses);	
 		//int? String? int[]? weaponProfs = weaponProfsSelection(keyb, classes);
 		int[] abilityDice = abilityDiceSelection(classes);
+		int alignment = alignmentSelection(keyb, classes);
+		int[][] abilities = spreadSheet(abilityDice);
+		for(int i = 0; i < 7; i++){
+			for(int j = 0; j < 20; j++){
+				System.out.print(abilities[i][j] + ",");
+			}
+			System.out.println();
+			
+		}
 		
 		
 		
@@ -659,6 +668,61 @@ public class PlayerCreator {
 				x[i] = c[i];
 		}
 		return x;
+	}
+	/**
+	 * This method creates an array of various sizes and fills it with d6 roll values.
+	 * @param numDice, the size of the array, contained in the abilityDice array.
+	 * @return an array of the rolls for the specified attribute.
+	 */
+	public static int[] diceRolls(int numDice){
+		int[] rolls = new int[numDice];
+		for(int i = 0; i < rolls.length; i++){
+			rolls[i] = (int)(Math.random()*6)+1;
+		}
+		return rolls;
+	}
+	/**
+	 * Returns the sum of the top 3 rolls of an attribute.
+	 * @param diceRolls, the array containing the value of the rolls for said ability.
+	 * @return the int that represents the ability score, the sum of the top 3 rolls.
+	 */
+	public static int abilityScore(int[] diceRolls){
+		for (int i = 0; i < diceRolls.length - 1; i++){
+			int index = i;
+			for (int j = i + 1; j < diceRolls.length; j++)
+				if (diceRolls[j] < diceRolls[index])
+					index = j;
+			int smallerNumber = diceRolls[index]; 
+			diceRolls[index] = diceRolls[i];
+			diceRolls[i] = smallerNumber;
+			}
+		return (diceRolls[diceRolls.length-1]+diceRolls[diceRolls.length-2]+diceRolls[diceRolls.length-3]);
+	}
+	/**
+	 * This method gives an array of the values of each of the character's attributes, the sum of the top three rolls. No longer in use, but might be useful.
+	 * @param abilityDice, the array containing the amount of dice to be rolled per attribute.
+	 * @return array of all the abilities.
+	 */
+	public static int[] allTheAbilities(int[] abilityDice){
+		int[] allTheAbilities = new int[abilityDice.length];
+		for(int i = 0; i < abilityDice.length; i++){
+			allTheAbilities[i] = abilityScore(diceRolls(abilityDice[i]));
+		}
+		return allTheAbilities;
+	}
+	/**
+	 * makes the ability spread sheet, 7 attributes 20 times.
+	 * @param abilityDice, the array containing the amount of dice to be rolled per attribute.
+	 * @return the 2d array of all the rolls.
+	 */
+	public static int[][] spreadSheet(int[] abilityDice){
+		int[][] sheet = new int[7][20];
+		for(int i = 0; i < 20; i++){
+			for(int j = 0; j < 7; j++){
+				sheet[j][i] = abilityScore(diceRolls(abilityDice[j]));
+			}
+		}
+		return sheet;
 	}
 	public static void println(String s){ //System.out.println shortcut
 		System.out.println(s);
