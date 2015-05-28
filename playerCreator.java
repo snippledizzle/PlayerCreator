@@ -14,12 +14,6 @@ public class PlayerCreator {
 		int[] abilityDice = abilityDiceSelection(classes);
 		int alignment = alignmentSelection(keyb, classes);
 		int[][] abilities = spreadSheet(abilityDice);
-		for(int i = 0; i < 7; i++){
-			for(int j = 0; j < 20; j++){
-				System.out.print(abilities[i][j] + ",");
-			}
-			System.out.println();
-		}
 		int[] stats = columnSelection(keyb, abilities);
 		for(int i = 0; i < stats.length; i++){
 			println(stats[i]+"");
@@ -725,7 +719,7 @@ public class PlayerCreator {
 			for(int j = 0; j < 7; j++){
 				sheet[j][i] = abilityScore(diceRolls(abilityDice[j]));
 			}
-		}
+		}		
 		return sheet;
 	}
 	/**
@@ -735,6 +729,28 @@ public class PlayerCreator {
 	 * @return the characters base stats, before any racial modification.
 	 */
 	public static int[] columnSelection(Scanner keyb, int[][] spreadSheet){
+		println("	1	2	3	4	5	6	7	8	9	10	11	12	13	14	15	16	17	18	19	20");
+		println("___________________________________________________________________________________________________________________________________________________________________");
+		for(int i = 0; i < 7; i++){
+			if(i == 0)
+				print("Str |	");
+			else if(i == 1)
+				print("Int |	");
+			else if(i == 2)
+				print("Wis |	");
+			else if(i == 3)
+				print("Dex |	");
+			else if(i == 4)
+				print("Con |	");
+			else if(i == 5)
+				print("Char|	");
+			else if(i == 6)
+				print("Com |	");
+			for(int j = 0; j < 20; j++){
+				System.out.print(spreadSheet[i][j] + "	");
+			}
+			System.out.println();
+		}
 		println("Choose your column wisely, enter 1 for the first column, 2 for the 2nd, etc...");
 		int chosenColumn = keyb.nextInt();
 		int[] chosenStats = new int[7];
